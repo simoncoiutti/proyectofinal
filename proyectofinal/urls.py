@@ -20,6 +20,7 @@ from Appcoder.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Appcoder/', include("Appcoder.urls")),
-    path("", inicio, name="inicio")
+    path("", inicio, name="inicio"),
+    
 
 ]
