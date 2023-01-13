@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
-from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
-from Appcoder.forms import RegistroUsuarioForm
+
+from Appcoder.forms import *
+
+from django.contrib.auth.forms import  UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.decorators import login_required #para vistas basadas en funciones DEF  
-from django.contrib.auth.mixins import LoginRequiredMixin #para vistas basadas en clases CLASS   
-
+from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def inicio(request):
@@ -28,4 +30,23 @@ def register(request):
             return render(request, "Appcoder/register.html", {"form": form, "mensaje":"Error al crear el usuario"})
     else:
         form= RegistroUsuarioForm()
-        return render(request, "AppCoder/register.html", {"form": form})
+        return render(request, "Appcoder/register.html", {"form": form})
+
+def login_request(request):
+    if request.method=="POST":
+        form=AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            usu=info["username"]
+            clave=info["password"]
+            usuario=authenticate(username=usu, password=clave)
+            if usuario is not None:
+                login(request, usuario)
+                return render(request, "Appcoder/inicio.html", {"mensaje":f"Usuario {usu} logueado correctamente"})
+            else:
+                return render(request, "Appcoder/login.html", {"form": form, "mensaje":"Usuario o contraseña incorrectos"})
+        else:
+            return render(request, "Appcoder/login.html", {"form": form, "mensaje":"Usuario o contraseña incorrectos"})
+    else:
+        form=AuthenticationForm()
+        return render(request, "Appcoder/login.html", {"form": form})

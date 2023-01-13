@@ -28,11 +28,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'acerca_de' %}">Acerca de</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
-                        
+                        <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Crear nuevo Post</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Bienvenido: {{ user.username }}</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 btn-danger" href="{% url 'logout' %}">Salir</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'acerca_de' %}">Acerca de</a></li>
+                            {% else %}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registro</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 btn-danger" href="{% url 'login' %}">Ingresar</a></li>
+                            
+                            
+                            {% endif %}
                     </ul>
                 </div>
             </div>

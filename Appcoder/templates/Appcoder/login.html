@@ -3,11 +3,12 @@
 {% load static %}
 
 {% block titulo %}
-<h2>Registrarse</h2>
+<h2>Ingreso</h2>
 {% endblock %}
 
 {% block subtitulo %}
-<form action="{% url 'register' %}" method="POST"> {% csrf_token %}
+
+<form action="{% url 'login' %}" method="POST"> {% csrf_token %}
 
     <table>
 
@@ -15,11 +16,6 @@
     
     </table>
 
-    <input type="submit" value="CREAR USUARIO">
+    <input type="submit" value="Ingresar">
 
-
-
-
-</form>
-
-{% endblock %}
+    {% endblock %}

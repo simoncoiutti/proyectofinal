@@ -29,17 +29,24 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Crear nuevo Post</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Bienvenido: {{ user.username }}</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 btn-danger" href="{% url 'logout' %}">Salir</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'acerca_de' %}">Acerca de</a></li>
+                        {% else %}
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registro</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4 btn-danger" href="{% url 'login' %}">Ingresar</a></li>
                         
+                        
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Page Header-->
-        <header class="masthead" style="background-image:('static/assets/img/aire.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
+        <header class="masthead" style="background-image:('assets/img/home-bg.jpg')">
+            <div class="container position-relative px-1 px-lg-2">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
