@@ -28,7 +28,7 @@ class UserEditForm(UserCreationForm):
     class Meta:
         model=User
         fields=["email", "password1", "password2", "first_name", "last_name"]
-        help_texts = {k:"" for k in fields}#para cada uno de los campos del formulario, le asigna un valor vacio
+        help_texts = {k:"" for k in fields}
 
 class AvatarForm(forms.Form):
     imagen=forms.ImageField(label="Imagen")

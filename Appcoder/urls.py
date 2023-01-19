@@ -10,5 +10,6 @@ urlpatterns = [
     path("acerca_de/", acerca_de , name="acerca_de"),
     path("register/", register, name="register"),
     path("login/", login_request, name="login"),
-    path('logout/', LogoutView.as_view(), name='logout')
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('editarPerfil/',editarPerfil, name= 'editarPerfil'),
 ]
