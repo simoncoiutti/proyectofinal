@@ -5,8 +5,9 @@ from .models import *
 # Register your models here.
 
 admin.site.register(Avatar)
+admin.site.register(Post)
 
-
+admin.site.register(Categoria)
 
 #post
 class postAdmin(admin.ModelAdmin):

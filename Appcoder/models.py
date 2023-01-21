@@ -1,12 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Create your models here.
 
+
+
 class Usuario(models.Model):
+    
     nombre= models.CharField(max_length=50)
     apellido= models.CharField(max_length=50)
     email= models.EmailField()
     profesion= models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name= 'Usuario'
+        verbose_name_plural= 'Usuarios'
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"

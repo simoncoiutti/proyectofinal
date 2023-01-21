@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
+from .models import *
 
 from Appcoder.forms import *
 
@@ -19,6 +20,14 @@ def acerca_de(request):
     return render (request, "Appcoder/acerca_de.html")
 
 
+def obtenerAvatar(request):
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista)!=0:
+        avatar=lista[0].imagen.url
+    else:
+        avatar="/media/avatars/avatarpordefecto.png"
+    return avatar
+
 def register(request):
     if request.method=="POST":
         form= RegistroUsuarioForm(request.POST)
@@ -31,6 +40,17 @@ def register(request):
     else:
         form= RegistroUsuarioForm()
         return render(request, "Appcoder/register.html", {"form": form})
+
+    
+        
+
+
+
+
+
+
+
+
 
 def login_request(request):
     if request.method=="POST":
@@ -72,3 +92,33 @@ def editarPerfil(request):
     else:
         form=UserEditForm(instance=usuario)
         return render(request, "Appcoder/editarPerfil.html", {"form": form, "nombreusuario":usuario.username})
+
+
+
+def agregarAvatar(request):
+    if request.method=="POST":
+        form=AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            avatar=Avatar(user=request.user, imagen=request.FILES["imagen"])
+            avatarViejo=Avatar.objects.filter(user=request.user)
+            if len(avatarViejo)>0:
+                avatarViejo[0].delete()
+            avatar.save()
+            return render(request, "Appcoder/inicio.html", {"mensaje":f"Avatar agregado correctamente"})
+        else:
+            return render(request, "Appcoder/agregarAvatar.html", {"form": form, "usuario": request.user, "mensaje":"Error al agregar el avatar"})
+    else:
+        form=AvatarForm()
+        return render(request, "Appcoder/agregarAvatar.html", {"form": form, "usuario": request.user})
+
+@login_required
+def leerUsuarios(request):
+
+    usuarios=Usuario.objects.all()
+
+    
+
+    return render(request, "Appcoder/Usuarios.html", {"usuarios": usuarios, "avatar": obtenerAvatar(request)})
+
+
+

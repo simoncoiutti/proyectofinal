@@ -128,3 +128,5 @@ LOGIN_REDIRECT_URL= '/Appcoder/login'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+CKEDITOR_UPLOAD_PATH="uploads/"
