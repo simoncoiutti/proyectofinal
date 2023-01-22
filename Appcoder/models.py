@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -28,21 +29,31 @@ class Avatar(models.Model):
 
 
 
-class Categoria(models.Model):
-    nombre= models.CharField(max_length=30,unique=True)
+class Categoria (models.Model):
+	nombre = models.CharField(max_length=200, unique=True, verbose_name='Nombre')
+	activo = models.BooleanField(default=True, verbose_name='Activo')
+	
+	modificado = models.DateTimeField(auto_now=True, verbose_name='Fecha de modificación')
 
+	class Meta:
+		verbose_name = 'Categoría'
+		verbose_name_plural = 'Categorías'
+		
+	def __str__(self):
+		return self.name
 
 class Post(models.Model):
+    id= models.AutoField(primary_key= True)
     titulo= models.CharField(max_length=200, verbose_name='Titulo')
-    bajada= models.CharField(max_length=500, verbose_name='Bajada')
-    contenido= models.TextField(verbose_name= 'Contenido')
+    subtitulo= models.CharField(max_length=500, verbose_name='Bajada')
+    contenido= RichTextField()
     imagen= models.ImageField(upload_to= 'Post', null=True, blank=True,verbose_name='Imagen')
-    """categoria= models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name= 'Autor')"""
+    
     creado= models.DateTimeField(auto_now_add=True,verbose_name= 'Fecha de creacion')
-
+    estado= models.BooleanField('Publicado/No Publicado', default= True)
     class Meta:
-        verbose_name= 'Publicacion'
-        verbose_name_plural= 'Publicaciones'
+        verbose_name= 'Post'
+        verbose_name_plural= 'Posts'
         
 
     def __str__(self):

@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import *
+
 from django.http import HttpResponse
-from .models import *
+from .models import Post,Categoria,Avatar,Usuario
 
 from Appcoder.forms import *
 
@@ -12,8 +12,11 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
 # Create your views here.
 def inicio(request):
+    post = Post.objects.filter(estado = True)
+    print(post)
     return render (request, "Appcoder/inicio.html")
 
 def acerca_de(request):
