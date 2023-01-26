@@ -125,3 +125,12 @@ def leerUsuarios(request):
 
 
 
+@login_required
+def buscar(request):
+    usuario= Usuario.objects.all()
+    
+    if usuario!="":
+        usuario= Usuario.objects.all#buscar otros filtros en la documentacion de django
+        return render(request, "Appcoder/resultadosBusqueda.html", {"usuarios": Usuario})
+    else:
+        return render(request, "Appcoder/busquedaComision.html", {"mensaje": "Che Ingresa una comision para buscar!"})

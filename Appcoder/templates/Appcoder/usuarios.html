@@ -64,18 +64,18 @@
 
 <ul>
     <h3>LISTADO DE USUARIOS</h3>
+    
+    {% for Usuario in Usuarios %}
+    <li>{{ Usuario.username }}</li>
 
-    {% for usuario in User %}
-    <li>{{ usuario.nombre }} {{ usuario.apellido }} </li>
-
-    <a class="btn btn-danger" href="">Eliminar </a>
-    <a class="btn btn-success" href="">Editar</a>
     {% endfor %}
 
 
 </ul>
 
 <h2>{{ mensaje }}</h2>
+
+
 
 
 {% endblock %}                          
