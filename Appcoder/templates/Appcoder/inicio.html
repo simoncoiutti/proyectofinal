@@ -6,11 +6,64 @@
 <h1>Blog de refrigeracion</h1>
 
 {% endblock %}
-
 {% block subtitulo %}
-<h3> </h3>
-<p> </p>
-
-<h5>{{ mensaje }}</h5>
 
 {% endblock %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <h2 class="post-title"></h2>
+           {% block posteo %}
+           {% for post in posts %}
+  {% if forloop.first and posts.number == 1 %}
+    {% if request.path == '/' %}
+      <div class="p-4 p-md-5 mb-4 rounded text-bg-info">
+        <div class="col-md-12 px-0">
+          <h1 class="display-4 fst-italic text-white">{{ post.title }}</h1>
+          <p class="lead my-3">{{ post.excerpt }}</p>
+          <p class="lead mb-0"><a href={% url 'post' post.id %} class="text-white fw-bold">Seguir leyendo...</a></p>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-5">
+          <img src={{ post.image.url }} class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-7">
+          <div class="card-body">
+            <strong class="d-inline-block mb-2 text-primary">{{ post.category }}</strong>
+            <h4 class="mb-0">{{ post.title }}</h4>
+            <div class="mb-1 text-muted">{{ post.created|date:"d M Y" }}</div>
+            <p class="card-text mb-auto">{{ post.excerpt }}</p>
+            <p class="card-text"><small class="text-muted"><a href={% url 'post' post.id %} class="stretched-link">Seguir leyendo</a></small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+{% endblock %}
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">{{ Post.titulo }}</h2>
+                    <h3 class="post-subtitle">{{ Post.subtitulo }}</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on September 24, 2022
+                </p>
+            </div>
+            
+            
+            
+            <!-- Divider-->
+            <hr class="my-4" />
+        
+        
+       
+            

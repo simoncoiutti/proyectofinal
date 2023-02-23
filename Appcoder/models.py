@@ -6,19 +6,6 @@ from ckeditor.fields import RichTextField
 
 
 
-class Usuario(models.Model):
-    
-    nombre= models.CharField(max_length=50)
-    apellido= models.CharField(max_length=50)
-    email= models.EmailField()
-    profesion= models.CharField(max_length=50)
-
-    class Meta:
-        verbose_name= 'Usuario'
-        verbose_name_plural= 'Usuarios'
-
-    def __str__(self):
-        return f"{self.nombre} {self.apellido}"
 
 
 
@@ -45,6 +32,7 @@ class Categoria (models.Model):
 class Post(models.Model):
     id= models.AutoField(primary_key= True)
     titulo= models.CharField(max_length=200, verbose_name='Titulo')
+   
     subtitulo= models.CharField(max_length=500, verbose_name='Bajada')
     contenido= RichTextField()
     imagen= models.ImageField(upload_to= 'Post', null=True, blank=True,verbose_name='Imagen')

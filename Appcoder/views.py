@@ -1,10 +1,11 @@
 from django.shortcuts import render
 
 from django.http import HttpResponse
-from .models import Post,Categoria,Avatar,Usuario
+from .models import Post,Categoria,Avatar
+
 
 from Appcoder.forms import *
-
+from django.contrib.auth.models import User #este es el nuevo
 from django.contrib.auth.forms import  UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 
@@ -17,7 +18,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def inicio(request):
     post = Post.objects.filter(estado = True)
     print(post)
-    return render (request, "Appcoder/inicio.html")
+    return render(request, "Appcoder/inicio.html",{'post':post})
+
+#def detallePost(request,titulo):
+    #post= Post.objets.get(titulo = titulo)
+    #return render(request,'post.html')
+
+
+
+
 
 def acerca_de(request):
     return render (request, "Appcoder/acerca_de.html")
@@ -62,9 +71,9 @@ def login_request(request):
             info=form.cleaned_data
             usu=info["username"]
             clave=info["password"]
-            usuario=authenticate(username=usu, password=clave)
-            if usuario is not None:
-                login(request, usuario)
+            user=authenticate(username=usu, password=clave)
+            if user is not None:
+                login(request, user)
                 return render(request, "Appcoder/inicio.html", {"mensaje":f"Usuario {usu} logueado correctamente"})
             else:
                 return render(request, "Appcoder/login.html", {"form": form, "mensaje":"Usuario o contraseña incorrectos"})
@@ -117,7 +126,8 @@ def agregarAvatar(request):
 @login_required
 def leerUsuarios(request):
 
-    usuarios=Usuario.objects.all()
+    usuarios=User.objects.all() #aca va user.objects
+
 
     
 
@@ -127,10 +137,10 @@ def leerUsuarios(request):
 
 @login_required
 def buscar(request):
-    usuario= Usuario.objects.all()
+    usuario= User.objects.all()
     
     if usuario!="":
-        usuario= Usuario.objects.all#buscar otros filtros en la documentacion de django
-        return render(request, "Appcoder/resultadosBusqueda.html", {"usuarios": Usuario})
+        usuario= User.objects.all#buscar otros filtros en la documentacion de django
+        return render(request, "Appcoder/resultadosBusqueda.html", {"usuarios": User})
     else:
         return render(request, "Appcoder/busquedaComision.html", {"mensaje": "Che Ingresa una comision para buscar!"})

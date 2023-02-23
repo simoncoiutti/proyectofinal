@@ -53,25 +53,22 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
                             {% block titulo %}
-                            <h3></h3>
+                            <h3><ul>
+                                <h3>LISTADO DE USUARIOS</h3>
+                                
+                                
+                                {% for Usuario in usuarios %}
+                                <li>{{ Usuario.username }}</li>
+                            
+                                {% endfor %}
+                            
+                            
+                            </ul></h3>
                             {% endblock %}
                             <span class="subheading">{% block subtitulo %}</span>
                             <h1 class="mb-5"></h1>
 
 
-
-<h2>no aparece nada</h2>
-
-<ul>
-    <h3>LISTADO DE USUARIOS</h3>
-    
-    {% for Usuario in Usuarios %}
-    <li>{{ Usuario.username }}</li>
-
-    {% endfor %}
-
-
-</ul>
 
 <h2>{{ mensaje }}</h2>
 

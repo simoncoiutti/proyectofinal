@@ -28,7 +28,7 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></li>
                         {% if user.is_authenticated %}
                         
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">Crear nuevo Post</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'usuarios' %}">Usuarios Registrados</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-2 py-3 py-lg-4" href="">Bienvenido: {{ user.username }}</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'editarPerfil' %}">Editar Usuario</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'agregarAvatar' %}">+ Avatar</a></li>
@@ -56,9 +56,10 @@
                             
                             {% endblock %}
                             <span class="subheading">{% block subtitulo %}</span>
+                            {% endblock %}
                             
-                            
-                            {{ mensaje }}
+                            {% block posteo %}
+                
                             
                             {% endblock %}
                         </div>
@@ -70,25 +71,23 @@
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
-                    {% if post %}
-                    {% for post in post %}
                     <!-- Post preview-->
+                    
+                    {% for post in post %}
                     <div class="post-preview">
-                        <a href="post.html">
+                        <a href="">
                             <h2 class="post-title">{{ post.titulo }}</h2>
-                            <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+                            <h3 class="post-subtitle">{{ post.subtitulo }}</h3>
                         </a>
                         <p class="post-meta">
-                            Posted by
-                            <a href="#!">Start Bootstrap</a>
-                            on September 24, 2022
+                            
+                            {{ post.creado}}
                         </p>
                     </div>
-                    
-                    
                     <!-- Divider-->
                     <hr class="my-4" />
-                {% endfor %}
-                
-                {% endif %}
+                    {% endfor %}
                     
+                    <!-- Post preview-->
+                    
+

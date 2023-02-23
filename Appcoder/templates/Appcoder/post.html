@@ -1,0 +1,15 @@
+{% extends "Appcoder/padre.html" %}
+
+{% load static %}
+<img src="{{ avatar }}" alt="">
+{% block titulo %}
+<h1>Blog de refrigeracion</h1>
+
+{% endblock %}
+{% block subtitulo %}
+
+{% endblock %}
+
+{{ post.titulo }}
+{{ post.subtitulo }}
+{{ post.contenido }}
